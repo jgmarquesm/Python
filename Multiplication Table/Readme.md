@@ -1,0 +1,1 @@
+This is a simple application of python to return the multiplication table of any number (int or float).

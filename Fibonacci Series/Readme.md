@@ -1,0 +1,1 @@
+This applications shows to user the Fibonacii series whatever how many elements it wants.
