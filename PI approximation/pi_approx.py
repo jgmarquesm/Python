@@ -55,7 +55,7 @@ while True:
             print("_______________________________________________________________________________")
         except:
             print(" ")
-            print("Invalid Data! To start, enter a valid entry. To close the programa, write stop.")
+            print("Invalid Data! To start, enter a valid entry. To close the program, write stop.")
             print("_______________________________________________________________________________")
 
 
