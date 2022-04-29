@@ -1,6 +1,6 @@
 while True:
     print(" ")
-    n_in = input("Enter with a integer number: ")
+    n_in = input("Enter with an integer number: ")
     print(" ")
     n_in = n_in.lower()
     if n_in == "stop":
