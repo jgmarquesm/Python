@@ -45,6 +45,11 @@ def result(pw):
     print("The generated password is:", pw)
     print("_______________________________________________________________________________")
 
+def print_(x):
+    print()
+    print(x)
+    print("_______________________________________________________________________________")
+
 def except_():
     print("_______________________________________________________________________________")
     print()
@@ -113,29 +118,21 @@ while condition:
                 print()
                 pw_size = int(size_in)
                 if pw_size < 4:
-                    print()
-                    print("You need to enter at least 4 in this case.")
-                    print("_______________________________________________________________________________")
+                    print_("You need to enter at least 4 in this case.")
                 else:
                     password = password3(pw_size)
                     result(password)                
                     i += 1
         else:
-            print()
-            print("Please, enter a valid case.")
-            print("_______________________________________________________________________________")
+            print_("Please, enter a valid case.")            
         print()
         print("If  you enter a invalid entry here, it will be assumed you want to stop.")
         cont = input("[Y/N] Do you want to execute one more time? ")
         cont = cont.lower()
         if cont == "y":
             condition = True
-        elif cont == "n":
-            condition = False
-            print()
-            print("Thank you for using this application!")
-            print("_______________________________________________________________________________")
         else:
             condition = False
+            print_("Thank you for using this application!")            
     except:
         except_()

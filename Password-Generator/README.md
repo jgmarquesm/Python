@@ -1,6 +1,6 @@
 <h2>This app generates random passwords on demand for the user.</h2>
 
-<h3>You, as a user, can select 3 types of passwords: Numeric, Alphanumeric without requirements and Alphanumeric with requirements. See the example below:
+<h3>You, as an user, can select 3 types of passwords: Numeric, Alphanumeric without requirements and Alphanumeric with requirements. See the example below:
 Imagine that you only want to create a numeric password with 6 characters...</h3>
 
 <img src="https://github.com/jgmarquesm/Python/blob/main/Password-Generator/img/example1.png" alt="Show 3 options of passwords to the user. 1 - Numeric, 2 - Alphanumeric, 3 - Alphanumeric with requirements. We select 1 with 6 characters.">
