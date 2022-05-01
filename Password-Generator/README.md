@@ -1,3 +1,5 @@
+<h1>Oops! I need to update the documentation... Sorry!</h1>
+
 <h2>This app generates random passwords on demand for the user.</h2>
 
 <h3>You, as an user, can select 3 types of passwords: Numeric, Alphanumeric without requirements and Alphanumeric with requirements. See the example below:
