@@ -19,7 +19,7 @@ Imagine that you only want to create a numeric password with 4 characters...</h3
 
 <img src="https://github.com/jgmarquesm/Python/blob/main/Password-Generator/img/example4.png" alt="Invalid data warning.">
 
-<h3>Below we see how the files were save. Note that one is named Test.txt, as i want to, and the others 2 have the standart name. You can verify this files <a src="https://github.com/jgmarquesm/Python/blob/main/Password-Generator/output">here</a>.</h3>
+<h3>Below we see how the files were save. Note that one is named Test.txt, as i want to, and the others 2 have the standart name. You can verify this files <a href="https://github.com/jgmarquesm/Python/blob/main/Password-Generator/output">here</a>.</h3>
 
 <img src="https://github.com/jgmarquesm/Python/blob/main/Password-Generator/img/example5.png" alt="Showing the output files' folder.">
 
