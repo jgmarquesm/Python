@@ -24,3 +24,4 @@ Imagine that you only want to create a numeric password with 4 characters...</h3
 <img src="https://github.com/jgmarquesm/Python/blob/main/Password-Generator/img/example5.png" alt="Showing the output files' folder.">
 
 <h4>To close, just enter stop anytime or type y when app asking to continue.</h4>
+<h4>I need to update the code to run on Windows.</h4>
