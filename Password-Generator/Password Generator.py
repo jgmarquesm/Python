@@ -70,10 +70,12 @@ while condition:
         print()
         case = input("Please, enter the kind of password yout want to get: ")
         case = case.lower()
+        
         if case == "stop":
             quit()
         i = 0
         case = int(case)
+        
         if case == 1:
             kind = "Numeric"
             print()
@@ -85,6 +87,7 @@ while condition:
             pw_size = int(size_in)
             password = password1(pw_size)
             result(password)
+        
         elif case == 2:
             kind = "Alphanumeric without reqs"
             print()
@@ -96,6 +99,7 @@ while condition:
             pw_size = int(size_in)
             password = password2(pw_size)
             result(password)
+        
         elif case == 3:
             kind = "Alphanumeric with reqs"
             print()
@@ -115,10 +119,12 @@ while condition:
                 result(password)
             else:   
                 password = password3(pw_size)
-                result(password)                
+                result(password)
+        
         else:
             print_("Please, enter a valid case.")
             break
+        
         print()
         now = datetime.now()
         date  = now.strftime("%d-%m-%Y %H:%M:%S")
@@ -133,14 +139,24 @@ while condition:
             passw = kind + " Password " + date + ".txt"
         else:
             quit()
-        pw_file = open(passw,'w')
+        
+        try:
+            path_ = "/home/notebook/Área de Trabalho/Github/Projetos/Python/Password-Generator/output/"
+            os.mkdir(path_)
+            complete_path_ = os.path.join(path_, passw)
+        except:
+            path_ = "/home/notebook/Área de Trabalho/Github/Projetos/Python/Password-Generator/output/"
+            complete_path_ = os.path.join(path_, passw)
+            
+        pw_file = open(complete_path_,"w")
         pw_file.write("Your Password is: "+password)
         pw_file.close()
+        
         print("_______________________________________________________________________________")
         print()
         print("If  you enter a invalid entry here, it will be assumed you want to stop.")
         cont = input("[Y/N] Do you want to execute one more time? ")
-        cont = cont.lower() 
+        cont = cont.lower()
         if cont == "y":
             condition = True
             os.system("clear")
