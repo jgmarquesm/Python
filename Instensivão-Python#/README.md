@@ -1,0 +1,1 @@
+<h1>Este diretório é/será usado para implementação dos exercícios propostos durante o Intensivo de Python realizado pela <a href="https://www.hashtagtreinamentos.com/">Hashtag<a> entre os dias 9 e 12 de maio de 2022.</h1>
