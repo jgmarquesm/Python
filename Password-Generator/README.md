@@ -25,3 +25,4 @@ Imagine that you only want to create a numeric password with 4 characters...</h3
 
 <h4>To close, just enter stop anytime or type y when app asking to continue.</h4>
 <h4>I need to update the code to run on Windows.</h4>
+<h4 style="color: red">This documentation needs to be upgrade. BTW, I'm thinking about to create a GUI to this applications... Coming soon</h4>
