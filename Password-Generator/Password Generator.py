@@ -1,3 +1,4 @@
+from zxcvbn import zxcvbn as se
 from datetime import datetime
 import string
 import random
@@ -43,11 +44,11 @@ def password3(size):
         rand_char = random.choice(all_char)
         pw += rand_char
     return pw
-
+    
 def result(pw):
     print()
     print("The generated password is:", pw)
-    print("Your password has been saved in a txt file.")
+    print("Your password has been saved in a .txt file.")
     print("_______________________________________________________________________________")
 
 def print_(x):
@@ -55,10 +56,24 @@ def print_(x):
     print(x)
     print("_______________________________________________________________________________")
 
+def strengthVerification(pw):
+    strength_estimator = se(pw)
+    score = strength_estimator["score"]
+    if score == 0:
+        print_("Score 0: Your password is terrible!")
+    elif score == 1:
+        print_("Score 1: Your password is not good and not safe!")
+    elif score == 2:
+        print_("Score 2: Your password is good, but not safe enough!")
+    elif score == 3:
+        print_("Score 3: Your password is in a good way to stay safe!")
+    elif score == 4:
+        print_("Score 4: Your password is the best forever! And safer too!")
+
 def except_():
     print("_______________________________________________________________________________")
     print()
-    print("Invalid Data! To start, enter an integer number.")
+    print("Invalid Data!")
     print("To close the program, write stop.")
     print("_______________________________________________________________________________")
 
@@ -72,7 +87,7 @@ while condition:
         case = case.lower()
         
         if case == "stop":
-            quit()
+            break
         i = 0
         case = int(case)
         
@@ -82,7 +97,7 @@ while condition:
             size_in = input("How many characters do you need in this password? ")
             size_in = size_in.lower()
             if size_in == "stop":
-                quit()
+                break
             print()
             pw_size = int(size_in)
             password = password1(pw_size)
@@ -94,7 +109,7 @@ while condition:
             size_in = input("How many characters do you need in this password? ")
             size_in = size_in.lower()
             if size_in == "stop":
-                quit()
+                break
             print()
             pw_size = int(size_in)
             password = password2(pw_size)
@@ -106,7 +121,7 @@ while condition:
             size_in = input("How many characters do you need in this password? ")
             size_in = size_in.lower()
             if size_in == "stop":
-                quit()
+                break
             pw_size = int(size_in)
             if pw_size < 4:
                 print_("You need to enter at least 4 in this case.")
@@ -114,7 +129,7 @@ while condition:
                 pw_size = int(input("How many characters do you need in this password? "))
                 size_in = size_in.lower()
                 if size_in == "stop":     
-                    quit()
+                    break
                 password = password3(pw_size)
                 result(password)
             else:   
@@ -123,7 +138,10 @@ while condition:
         
         else:
             print_("Please, enter a valid case.")
-            break
+            os.system("clear")
+            continue
+
+        strengthVerification(password)
         
         print()
         now = datetime.now()
@@ -132,13 +150,13 @@ while condition:
         customize = input("[Y/N] Do you want to customize the file name? ")
         customize = customize.lower()
 
-        if customize == "y":
+        if customize == "y" or customize == "yes":
             passw = input("Enter the name you want to save it: ")
             passw += ".txt"
-        elif customize == "n":
+        elif customize == "n" or customize == "no" or customize == "not":
             passw = kind + " Password " + date + ".txt"
         else:
-            quit()
+            break
         
         try:
             path_ = "/home/notebook/Área de Trabalho/Github/Projetos/Python/Password-Generator/output/"
@@ -149,15 +167,16 @@ while condition:
             complete_path_ = os.path.join(path_, passw)
             
         pw_file = open(complete_path_,"w")
-        pw_file.write("Your Password is: "+password)
+        pw_file.write("Your Password is: {}".format(password))
         pw_file.close()
-        
+       
+
         print("_______________________________________________________________________________")
         print()
         print("If  you enter a invalid entry here, it will be assumed you want to stop.")
         cont = input("[Y/N] Do you want to execute one more time? ")
         cont = cont.lower()
-        if cont == "y":
+        if cont == "y" or cont == "yes":
             condition = True
             os.system("clear")
         else:
