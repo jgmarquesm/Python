@@ -1,21 +1,15 @@
 from zxcvbn import zxcvbn as se
 from datetime import datetime
+import PySimpleGUI as sg
+import pyperclip
 import string
 import random
 import os
 
 symbols = "!$%&()*+,-./:;<=>?@[\]^_`{|}~"
 
-def init():
-    print()
-    print("Wellcome to the Password Generator!")
-    print("_______________________________________________________________________________")
-    print()
-    print("1 - Numeric Password.")
-    print("2 - Alphanumeric Password without requeriments.")
-    print("3 - Alphanumeric Password with requirements (At least 4 characters).")
-    print("Enter stop anytime to close.")
-    print("_______________________________________________________________________________")
+sg.theme("DarkBlue17")
+
 
 def password1(size):
     all_char = string.digits
@@ -25,6 +19,7 @@ def password1(size):
         pw += rand_char
     return pw
 
+
 def password2(size):
     all_char = string.ascii_letters + string.digits + symbols
     pw = ""
@@ -33,6 +28,7 @@ def password2(size):
         pw += rand_char
     return pw
 
+
 def password3(size):
     all_char = string.ascii_letters + string.digits + symbols
     pw = ""
@@ -40,147 +36,188 @@ def password3(size):
     pw += random.choice(string.ascii_lowercase)
     pw += random.choice(string.digits)
     pw += random.choice(symbols)
-    for char in range(size-4):
+    for char in range(size - 4):
         rand_char = random.choice(all_char)
         pw += rand_char
     return pw
-    
-def result(pw):
-    print()
-    print("The generated password is:", pw)
-    print("Your password has been saved in a .txt file.")
-    print("_______________________________________________________________________________")
 
-def print_(x):
-    print()
-    print(x)
-    print("_______________________________________________________________________________")
 
 def strengthVerification(pw):
     strength_estimator = se(pw)
     score = strength_estimator["score"]
     if score == 0:
-        print_("Score 0: Your password is terrible!")
+        return "Score 0: Your password is terrible!"
     elif score == 1:
-        print_("Score 1: Your password is not good and not safe!")
+        return "Score 1: Your password is not good and not safe!"
     elif score == 2:
-        print_("Score 2: Your password is good, but not safe enough!")
+        return "Score 2: Your password is good, but not safe enough!"
     elif score == 3:
-        print_("Score 3: Your password is in a good way to stay safe!")
+        return "Score 3: Your password is in a good way to stay safe!"
     elif score == 4:
-        print_("Score 4: Your password is the best forever! And safer too!")
+        return "Score 4: Your password is the best forever! And safer too!"
 
-def except_():
-    print("_______________________________________________________________________________")
-    print()
-    print("Invalid Data!")
-    print("To close the program, write stop.")
-    print("_______________________________________________________________________________")
 
-condition = True
-    
-while condition:
-    try:
-        init()
-        print()
-        case = input("Please, enter the kind of password yout want to get: ")
-        case = case.lower()
-        
-        if case == "stop":
-            break
-        i = 0
-        case = int(case)
-        
-        if case == 1:
-            kind = "Numeric"
-            print()
-            size_in = input("How many characters do you need in this password? ")
-            size_in = size_in.lower()
-            if size_in == "stop":
-                break
-            print()
-            pw_size = int(size_in)
-            password = password1(pw_size)
-            result(password)
-        
-        elif case == 2:
-            kind = "Alphanumeric without reqs"
-            print()
-            size_in = input("How many characters do you need in this password? ")
-            size_in = size_in.lower()
-            if size_in == "stop":
-                break
-            print()
-            pw_size = int(size_in)
-            password = password2(pw_size)
-            result(password)
-        
-        elif case == 3:
-            kind = "Alphanumeric with reqs"
-            print()
-            size_in = input("How many characters do you need in this password? ")
-            size_in = size_in.lower()
-            if size_in == "stop":
-                break
-            pw_size = int(size_in)
-            if pw_size < 4:
-                print_("You need to enter at least 4 in this case.")
-                print()
-                pw_size = int(input("How many characters do you need in this password? "))
-                size_in = size_in.lower()
-                if size_in == "stop":     
-                    break
-                password = password3(pw_size)
-                result(password)
-            else:   
-                password = password3(pw_size)
-                result(password)
-        
-        else:
-            print_("Please, enter a valid case.")
-            os.system("clear")
-            continue
-
-        strengthVerification(password)
-        
-        print()
-        now = datetime.now()
-        date  = now.strftime("%d-%m-%Y %H:%M:%S")
-        print("If  you enter a invalid entry here, it will be assumed you want to stop.")
-        customize = input("[Y/N] Do you want to customize the file name? ")
-        customize = customize.lower()
-
-        if customize == "y" or customize == "yes":
-            passw = input("Enter the name you want to save it: ")
-            passw += ".txt"
-        elif customize == "n" or customize == "no" or customize == "not":
-            passw = kind + " Password " + date + ".txt"
-        else:
-            break
-        
+def main():
+    global kind, password, passw, window1
+    condition = True
+    while condition:
         try:
-            path_ = "/home/notebook/Área de Trabalho/Github/Projetos/Python/Password-Generator/output/"
-            os.mkdir(path_)
-            complete_path_ = os.path.join(path_, passw)
-        except:
-            path_ = "/home/notebook/Área de Trabalho/Github/Projetos/Python/Password-Generator/output/"
-            complete_path_ = os.path.join(path_, passw)
-            
-        pw_file = open(complete_path_,"w")
-        pw_file.write("Your Password is: {}".format(password))
-        pw_file.close()
-       
+            layout1 = [[sg.Push(), sg.T("Welcome to the Password Generator!"), sg.Push()],
+                       [sg.Push(), sg.T("How many characters do you need in this password? "), sg.Input(key="-PWSIZE-"),
+                        sg.Push()],
+                       [sg.T("Please, INT numbers only"), sg.Push()],
+                       [sg.Push(), sg.T("Please, choose which one you want."), sg.Push()],
+                       [sg.T("PW1 - Numeric Password."), sg.Push()],
+                       [sg.T("PW2 - Alphanumeric Password without requeriments."), sg.Push()],
+                       [sg.T("PW3 - Alphanumeric Password with requirements (At least 4 characters)."), sg.Push()],
+                       [sg.Push(), sg.B("PW1"), sg.B("PW2"), sg.B("PW3"), sg.Push()]]
 
-        print("_______________________________________________________________________________")
-        print()
-        print("If  you enter a invalid entry here, it will be assumed you want to stop.")
-        cont = input("[Y/N] Do you want to execute one more time? ")
-        cont = cont.lower()
-        if cont == "y" or cont == "yes":
-            condition = True
-            os.system("clear")
-        else:
-            condition = False
-            print_("Thank you for using this application!")            
-    except:
-        except_()
+            window1 = sg.Window("Password Generator v.2", layout1)
+
+            event1, values1 = window1.read()
+
+            if event1 == sg.WIN_CLOSED:
+                break
+
+            if event1 == "PW1":
+                kind = "Numeric"
+                pw_size = int(values1["-PWSIZE-"])
+                password = password1(pw_size)
+
+            elif event1 == "PW2":
+                kind = "Alphanumeric without reqs"
+                pw_size = int(values1["-PWSIZE-"])
+                password = password2(pw_size)
+
+            elif event1 == "PW3":
+                kind = "Alphanumeric with reqs"
+                pw_size = int(values1["-PWSIZE-"])
+                if pw_size < 4:
+                    layoutLT4 = [sg.T("It must have at least 4 characteres."),
+                                 [sg.B("OK"), sg.B("Close")]]
+
+                    windowLT4 = sg.Window("Password Generator v.2", layoutLT4, element_justification='c')
+
+                    eventLT4, valuesLT4 = windowLT4.read()
+
+                    if eventLT4 == "OK":
+                        windowLT4.close()
+                        layoutLT4OK = [[sg.Push(), sg.T("How many characters do you need in this password? "),
+                                        sg.In(key="-PWSIZE-"), sg.Push()],
+                                       [sg.T("Please, INT numbers only"), sg.Push()]]
+
+                        windowLT4OK = sg.Window("Password Generator v.2", layoutLT4OK)
+
+                        eventLT4OK, valuesLT4OK = windowLT4OK.read()
+
+                        if eventLT4OK == sg.WIN_CLOSED:
+                            break
+
+                        else:
+                            pw_size = int(valuesLT4OK["-PWSIZE-"])
+
+                        password = password3(pw_size)
+
+                        windowLT4OK.close()
+                    elif eventLT4 in (sg.WIN_CLOSED, "Close"):
+                        break
+
+                    windowLT4.close()
+                else:
+                    password = password3(pw_size)
+
+            window1.close()
+
+            now = datetime.now()
+            date = now.strftime("%d-%m-%Y %H:%M:%S")
+
+            layout2 = [
+                [sg.T("Do you want to customize the output file name?")],
+                [sg.B("Yes"), sg.B("No")]
+            ]
+            window2 = sg.Window("Password Generator v.2", layout2, element_justification='c')
+            event2, values2 = window2.read()
+
+            if event2 == sg.WIN_CLOSED:
+                break
+
+            elif event2 == "Yes":
+                layout21 = [[sg.T("What is the file name you want?"), sg.Input(key="passw")],
+                            [sg.Push(), sg.OK(), sg.Push()]]
+
+                window21 = sg.Window("Password Generator v.2", layout21)
+
+                event21, values21 = window21.read()
+
+                passw = values21["passw"] + ".txt"
+
+                window21.close()
+            elif event2 == "No":
+                passw = kind + " Password " + date + ".txt"
+
+            try:
+                path_ = "/home/notebook/Área de Trabalho/Github/Projetos/Python/Password Generator v.2/output/"
+                os.mkdir(path_)
+                complete_path_ = os.path.join(path_, passw)
+            except:
+                path_ = "/home/notebook/Área de Trabalho/Github/Projetos/Python/Password-Generator/output/"
+                complete_path_ = os.path.join(path_, passw)
+
+            pw_file = open(complete_path_, "w")
+            pw_file.write("Your Password is: {}".format(password))
+            pw_file.close()
+
+            strength = strengthVerification(password)
+
+            if event2 in ("Yes", "No"):
+                window2.close()
+                layout3 = [[sg.Push(), sg.T("Sucessfull saved."), sg.Push()],
+                           [sg.T(f"Your Password is: {password}"), sg.Push()],
+                           [sg.T(f"{strength}"), sg.Push()],
+                           [sg.Push(), sg.B("Copy to clipboard"), sg.Push()]]
+
+                window3 = sg.Window("Password Generator v.2", layout3)
+
+                event3, values3 = window3.read()
+
+                if event3 == sg.WIN_CLOSED:
+                    break
+                elif event3 == "Copy to clipboard":
+                    pyperclip.copy(password)
+
+                    layout4 = [[sg.Push(), sg.T("Sucessfull saved."), sg.Push()],
+                               [sg.T(f"Your Password is: {password}"), sg.Push()],
+                               [sg.T(f"{strength}"), sg.Push()],
+                               [sg.Push(), sg.T("The password has been copied to the clipboard!"), sg.Push()],
+                               [sg.Push(), sg.B("OK"), sg.Push()]]
+
+                    window4 = sg.Window("Password Generator v.2", layout4)
+
+                    event4, values4 = window4.read()
+
+                    if event4 in (sg.WIN_CLOSED, "OK"):
+                        break
+
+                    window4.close()
+
+                window3.close()
+
+        except:
+            layoutexcept = [[sg.Push(), sg.T("Oops! Something were going wrong."), sg.Push()],
+                            [sg.Push(), sg.B("Try again"), sg.B("Close"), sg.Push()]]
+
+            windowexcept = sg.Window("Password Generator v.2", layoutexcept)
+
+            eventexcept, valuesexcept = windowexcept.read()
+
+            if eventexcept == "Try again":
+                window1.close()
+                condition = True
+            elif eventexcept in (sg.WIN_CLOSED, "Close"):
+                condition = False
+
+            windowexcept.close()
+
+
+if __name__ == "__main__":
+    main()
