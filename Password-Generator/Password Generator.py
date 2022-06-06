@@ -62,15 +62,17 @@ def main():
     condition = True
     while condition:
         try:
-            layout1 = [[sg.Push(), sg.T("Welcome to the Password Generator!"), sg.Push()],
-                       [sg.Push(), sg.T("How many characters do you need in this password? "), sg.Input(key="-PWSIZE-"),
-                        sg.Push()],
-                       [sg.T("Please, INT numbers only"), sg.Push()],
-                       [sg.Push(), sg.T("Please, choose which one you want."), sg.Push()],
-                       [sg.T("PW1 - Numeric Password."), sg.Push()],
-                       [sg.T("PW2 - Alphanumeric Password without requeriments."), sg.Push()],
-                       [sg.T("PW3 - Alphanumeric Password with requirements (At least 4 characters)."), sg.Push()],
-                       [sg.Push(), sg.B("PW1"), sg.B("PW2"), sg.B("PW3"), sg.Push()]]
+            layout1 = [[sg.Push(), sg.T("Welcome to the Password Generator v.2", font="helvetica 18 bold", text_color="#87CEFA"), sg.Push()],
+                       [sg.T("")],
+                       [sg.Push(), sg.T("How many characters do you need in this password?", font="arial 11"), sg.Input(key="-PWSIZE-", font="arial 11 bold", size=(10,0)),
+                        sg.T("")],
+                       [sg.Push()],
+                       [sg.Push(), sg.T("Please, choose which one you want", font= "helvetica 12", text_color="#FFD700"), sg.Push()],
+                       [sg.B("PW1"), sg.T("- Numeric Password.", font="arial 11"), sg.Push()],
+                       [sg.B("PW2"), sg.T("- Alphanumeric Password without requeriments.", font="arial 11"), sg.Push()],
+                       [sg.B("PW3"), sg.T("- Alphanumeric Password with requirements (At least 4 characters).", font="arial 11"), sg.Push()],
+                       [sg.T(" ")],
+                       [sg.Push(), sg.T("Powered by João Gabriel", text_color="#483D8B"), sg.Push()]]
 
             window1 = sg.Window("Password Generator v.2", layout1)
 
@@ -93,7 +95,7 @@ def main():
                 kind = "Alphanumeric with reqs"
                 pw_size = int(values1["-PWSIZE-"])
                 if pw_size < 4:
-                    layoutLT4 = [sg.T("It must have at least 4 characteres."),
+                    layoutLT4 = [[sg.T("It must have at least 4 characteres.", font="arial 11")],
                                  [sg.B("OK"), sg.B("Close")]]
 
                     windowLT4 = sg.Window("Password Generator v.2", layoutLT4, element_justification='c')
@@ -101,10 +103,11 @@ def main():
                     eventLT4, valuesLT4 = windowLT4.read()
 
                     if eventLT4 == "OK":
+                        window1.close()
                         windowLT4.close()
-                        layoutLT4OK = [[sg.Push(), sg.T("How many characters do you need in this password? "),
-                                        sg.In(key="-PWSIZE-"), sg.Push()],
-                                       [sg.T("Please, INT numbers only"), sg.Push()]]
+                        layoutLT4OK = [[sg.Push(), sg.T("How many characters do you need in this password?", font="arial 11"),
+                                        sg.In(key="-PWSIZE-", font="arial 11 bold", size=(10,0)), sg.Push()],
+                                       [sg.Push(), sg.OK(), sg.Push()]]
 
                         windowLT4OK = sg.Window("Password Generator v.2", layoutLT4OK)
 
@@ -132,7 +135,7 @@ def main():
             date = now.strftime("%d-%m-%Y %H:%M:%S")
 
             layout2 = [
-                [sg.T("Do you want to customize the output file name?")],
+                [sg.T("Do you want to customize the output file name?", font="arial 11", text_color="#FFD700")],
                 [sg.B("Yes"), sg.B("No")]
             ]
             window2 = sg.Window("Password Generator v.2", layout2, element_justification='c')
@@ -142,7 +145,7 @@ def main():
                 break
 
             elif event2 == "Yes":
-                layout21 = [[sg.T("What is the file name you want?"), sg.Input(key="passw")],
+                layout21 = [[sg.T("What is the file name you want?", font="arial 11"), sg.Input(key="passw", font="arial 11 bold", size=(30,0))],
                             [sg.Push(), sg.OK(), sg.Push()]]
 
                 window21 = sg.Window("Password Generator v.2", layout21)
@@ -171,9 +174,11 @@ def main():
 
             if event2 in ("Yes", "No"):
                 window2.close()
-                layout3 = [[sg.Push(), sg.T("Sucessfull saved."), sg.Push()],
-                           [sg.T(f"Your Password is: {password}"), sg.Push()],
-                           [sg.T(f"{strength}"), sg.Push()],
+                layout3 = [[sg.Push(), sg.T("Sucessfully saved.", font="helvetica 15", text_color="#ADFF2F"), sg.Push()],
+                           [sg.T("")],
+                           [sg.T("Your Password is:", font="arial 11"), sg.T(password, font="arial 11", text_color="#FFD700"), sg.Push()],
+                           [sg.T(strength, font="arial 11"), sg.Push()],
+                           [sg.T("")],
                            [sg.Push(), sg.B("Copy to clipboard"), sg.Push()]]
 
                 window3 = sg.Window("Password Generator v.2", layout3)
@@ -185,10 +190,13 @@ def main():
                 elif event3 == "Copy to clipboard":
                     pyperclip.copy(password)
 
-                    layout4 = [[sg.Push(), sg.T("Sucessfull saved."), sg.Push()],
-                               [sg.T(f"Your Password is: {password}"), sg.Push()],
-                               [sg.T(f"{strength}"), sg.Push()],
-                               [sg.Push(), sg.T("The password has been copied to the clipboard!"), sg.Push()],
+                    layout4 = [[sg.Push(), sg.T("Sucessfully saved.", font="helvetica 15", text_color="#ADFF2F"), sg.Push()],
+                               [sg.T("")],
+                               [sg.T("Your Password is:", font="arial 11"), sg.T(password, font="arial 11", text_color="#FFD700"), sg.Push()],
+                               [sg.T(strength, font="arial 11"), sg.Push()],
+                               [sg.T("")],
+                               [sg.Push(), sg.T("The password has been copied to the clipboard!", font="arial 11 bold", text_color="#87CEFA"), sg.Push()],
+                               [sg.T("")],
                                [sg.Push(), sg.B("OK"), sg.Push()]]
 
                     window4 = sg.Window("Password Generator v.2", layout4)
@@ -203,10 +211,11 @@ def main():
                 window3.close()
 
         except:
-            layoutexcept = [[sg.Push(), sg.T("Oops! Something were going wrong."), sg.Push()],
+            layoutexcept = [[sg.Push(), sg.T("Oops! Something went wrong.", font="arial 12 bold", text_color="#FF6347"), sg.Push()],
+                            [sg.T("")],
                             [sg.Push(), sg.B("Try again"), sg.B("Close"), sg.Push()]]
 
-            windowexcept = sg.Window("Password Generator v.2", layoutexcept)
+            windowexcept = sg.Window("Password Generator v.2 - ERRO", layoutexcept)
 
             eventexcept, valuesexcept = windowexcept.read()
 
