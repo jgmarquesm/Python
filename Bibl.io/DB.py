@@ -36,22 +36,23 @@ class DataBaseBiblioteca:
         if condition not in conditionals:
             print(f"ERRO. A coluna {condition} não existe.")
         elif condition in conditionals:
-            if new_value is str and condition_value is str:
+            if isinstance(new_value, str) and isinstance(condition_value, str):
                 self.cursor.execute(
                     f"UPDATE '{table_name}' SET '{colunm}' = '{new_value}' WHERE '{condition}' = '{condition_value}' "
                     f"ORDER BY '{ordered}'")
                 self.connection.commit()
-            elif new_value is str and condition_value is int or condition_value is float:
+            elif isinstance(new_value, str) and isinstance(condition_value, int) or isinstance(condition_value, float):
                 self.cursor.execute(
                     f"UPDATE '{table_name}' SET '{colunm}' = '{new_value}' WHERE '{condition}' = {condition_value} "
                     f"ORDER BY '{ordered}'")
                 self.connection.commit()
-            elif new_value is float or new_value is int and condition_value is str:
+            elif isinstance(new_value, int) or isinstance(new_value, float) and isinstance(condition_value, str):
                 self.cursor.execute(
                     f"UPDATE '{table_name}' SET '{colunm}' = {new_value} WHERE '{condition}' = '{condition_value}' "
                     f"ORDER BY '{ordered}'")
                 self.connection.commit()
-            elif new_value is int or new_value is float and condition_value is int or condition_value is float:
+            elif isinstance(new_value, int) or isinstance(new_value, float) and isinstance(condition_value, int) or \
+                    isinstance(condition_value, float):
                 self.cursor.execute(
                     f"UPDATE '{table_name}' SET '{colunm}' = {new_value} WHERE {condition} = {condition_value} "
                     f"ORDER BY '{ordered}'")

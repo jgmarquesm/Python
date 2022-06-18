@@ -17,7 +17,7 @@ class Livros:
         self.__writer = writer
         a = 0
         t = len(self.__writer)
-        if type(self.__writer) == type("string"):
+        if isinstance(self.__writer, str):
             self.author = writer
         else:
             self.author = ""
@@ -33,7 +33,7 @@ class Livros:
         self.__gender = gender
         b = 0
         u = len(self.__gender)
-        if type(self.__gender) == type("string"):
+        if isinstance(self.__gender, str):
             self.genders = gender
         else:
             self.genders = ""
@@ -46,7 +46,7 @@ class Livros:
         self.__translate = translate
         c = 0
         v = len(self.__translate)
-        if type(self.__translate) == type("string"):
+        if isinstance(self.__translate, str):
             self.translator = translate
         else:
             self.translator = ""

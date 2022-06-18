@@ -6,5 +6,3 @@ try:
 except:
     os.system("pip install pytest")
     import pytest
-
-pass
