@@ -3,7 +3,7 @@ import os
 
 try:
     import pytest
-except:
+except ImportError:
     os.system("pip install pytest")
     import pytest
 

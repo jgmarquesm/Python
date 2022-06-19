@@ -3,7 +3,7 @@ import os
 
 try:
     from typing import Any
-except:
+except ImportError:
     os.system("pip install typing")
     from typing import Any
 

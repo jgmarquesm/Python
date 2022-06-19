@@ -3,7 +3,7 @@ import os
 
 try:
     import sqlite3 as sql
-except:
+except ImportError:
     os.system("pip install sqlite3")
     import sqlite3 as sql
 
