@@ -5,7 +5,8 @@ from module.GUI import *
 
 
 def main():
-    janela_inicial()
+    background_image = "no_image"  # Lembrando que esse é o padrão para quando não há BG_image.
+    janela_inicial(background_image)  # Outra maneira de esxecutar o padrão, é não passar argumento nessa função
     while True:
         window, event, values = sg.read_all_windows()
         c = DataBaseBiblioteca()  # Objeto de DataBaseBiblioteca para fazer CRUD e Backups
