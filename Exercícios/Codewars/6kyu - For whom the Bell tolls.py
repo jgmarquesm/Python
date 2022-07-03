@@ -1,3 +1,5 @@
+# https://www.codewars.com/kata/62665d43e67fbaf7b37212d2
+
 def bell(n):
     if n % 2 == 0:
         lista_par = []

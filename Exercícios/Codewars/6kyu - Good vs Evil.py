@@ -1,3 +1,5 @@
+# https://www.codewars.com/kata/52761ee4cffbc69732000738
+
 def good_vs_evil(good, evil):
     
     good_team = good.split()

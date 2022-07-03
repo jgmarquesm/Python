@@ -1,3 +1,5 @@
+# https://www.codewars.com/kata/550527b108b86f700000073f
+
 import math
 def iter_pi(tol):
     approx_pi = 0

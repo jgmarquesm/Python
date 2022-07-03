@@ -1,3 +1,5 @@
+# https://www.codewars.com/kata/5815f7e789063238b30001aa
+
 from statistics import mean
 
 def redistribute_wealth(wealth):

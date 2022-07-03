@@ -1,3 +1,5 @@
+# https://www.codewars.com/kata/5266876b8f4bf2da9b000362
+
 def likes(names):
     n = len(names) - 2
     n_str = str(n)

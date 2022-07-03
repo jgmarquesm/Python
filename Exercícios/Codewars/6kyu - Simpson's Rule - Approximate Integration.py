@@ -1,3 +1,5 @@
+# https://www.codewars.com/kata/565abd876ed46506d600000d
+
 import math
 
 # f(x) = 3/2 sin**3(x)

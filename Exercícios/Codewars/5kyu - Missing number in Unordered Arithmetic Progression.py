@@ -1,3 +1,5 @@
+# https://www.codewars.com/kata/568fca718404ad457c000033
+
 def find(seq):
     seq.sort()
     d=min(seq[1]-seq[0],seq[-1]-seq[-2])

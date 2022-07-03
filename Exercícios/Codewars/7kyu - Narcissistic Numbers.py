@@ -1,3 +1,5 @@
+# https://www.codewars.com/kata/56b22765e1007b79f2000079
+
 def is_narcissistic(n):
     i = n
     digits = []

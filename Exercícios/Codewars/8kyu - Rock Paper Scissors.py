@@ -1,3 +1,5 @@
+# https://www.codewars.com/kata/5672a98bdbdd995fad00000f
+
 def rps(p1, p2):
     if p1 == p2:
         return "Draw!"

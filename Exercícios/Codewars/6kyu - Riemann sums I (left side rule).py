@@ -1,3 +1,5 @@
+# https://www.codewars.com/kata/5562ab5d6dca8009f7000050
+
 def left_riemann(f, n, a, b):
     left_sum = 0
     dx = (b-a)/n

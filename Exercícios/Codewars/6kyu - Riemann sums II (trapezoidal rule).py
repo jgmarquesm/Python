@@ -1,3 +1,5 @@
+# https://www.codewars.com/kata/5562b6de2f508f1adc000089
+
 def riemann_trapezoidal(f, n, a, b):
     integral = 0
     dx = (b-a)/n
